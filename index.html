@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="nota">
+        <form id="form">
+            <div>
+                <label class="suma" for="suma">Valoarea notei de plata</label>
+                <input type="number" id="suma">
+            </div>
+    
+            <div>
+                <input type="radio" name="procent" value="0" id="fara">
+                <label for="fara">Fara bacsis</label>
+            </div>
+    
+            <div>
+                <input type="radio" name="procent" value="5" id="cinci">
+                <label for="cinci">5%</label>
+            </div>
+    
+            <div>
+                <input type="radio" name="procent" value="10" id="zece">
+                <label for="zece">10%</label>
+            </div>
+    
+            <div>
+                <input type="radio" name="procent" value="15" id="cincisprezece">
+                <label for="cincisprezece">15%</label>
+            </div>
+    
+            <div>
+                <input type="radio" name="procent" id="custom">
+                <input type="number" id="customValue">
+            </div>
+    
+            <button id="btn" type="button">Calculeaza</button>
+            <button id="rst" type="button">Reset</button>
+            <p id="suma-initiala"></p>
+            <p id="bacsis"></p>
+            <p id="total"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('customValue').addEventListener('input', function () {
+            document.getElementById('custom').value = this.value;
+        });
+        let btn = document.getElementById("btn");
+        let rst=document.getElementById("rst");
+        btn.onclick = function () {
+            let selected = document.querySelector("input[name=procent]:checked");
+            if (selected) {
+                if(selected.value==="on")
+                alert("Trebuie sa introduci o valoare");
+                else{
+                    let suma_initiala=Number(document.getElementById("suma").value);
+                    let bacsis=suma_initiala*selected.value/100;
+                    let total=suma_initiala+bacsis;
+                    document.getElementById("suma-initiala").innerText="Suma initiala : "+suma_initiala;
+                    document.getElementById("bacsis").innerText="Valoarea bacsisului : "+bacsis;
+                    document.getElementById("total").innerText="Total : "+total;
+                }
+            }
+            else {
+                alert("Trebuie sa selectezi o optiune");
+            }
+        }
+        rst.onclick=function(){
+            document.getElementById("suma-initiala").innerText="";
+            document.getElementById("bacsis").innerText="";
+            document.getElementById("total").innerText="";
+            let selected = document.querySelector("input[name=procent]:checked");
+            if(selected)
+                selected.checked=false;
+            document.getElementById("customValue").value="";
+            document.getElementById("custom").value="";
+            document.getElementById("suma").value="";
+        }
+    </script>
+</body>
+
+</html>
